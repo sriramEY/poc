@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app-deployment
+  namespace: python-k8s-poc
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: poc
+  template:
+    metadata:
+      labels:
+        app: poc
+    spec:
+      containers:
+        - name: myappv1
+          image: sriram21ey/myapp:v1
+          ports:
+            - containerPort: 5000
