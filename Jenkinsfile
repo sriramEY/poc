@@ -1,23 +1,38 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
+        
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("your-docker-username/flask-app:tag")
+                    def dockerImage = docker.build("sriram21ey/myapp:v1")
                 }
             }
         }
+        
         stage('Deploy to Kubernetes') {
             steps {
-                sh "kubectl apply -f kubernetes-deployment.yaml"  // Your Kubernetes deployment manifest
+                kubernetesDeploy(
+                    kubeconfigId: 'kubeconfig',
+                    configs: 'deployment.yaml',
+                    enableConfigSubstitution: true,
+                    namespace: 'python-k8s-poc'
+                    // secretName: '',
+                    // secretNamespace: ''
+                )
             }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
         }
     }
 }
