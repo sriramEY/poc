@@ -18,14 +18,11 @@ pipeline {
         
         stage('Deploy to Kubernetes') {
             steps {
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'deployment.yaml',
-                    enableConfigSubstitution: true,
-                    namespace: 'python-k8s-poc'
-                    // secretName: '',
-                    // secretNamespace: ''
-                )
+                script {
+                    def kubeconfig = credentials('kubeconfig')
+                    
+                    sh "kubectl --kubeconfig=$kubeconfig apply -f deployment.yaml"
+                }
             }
         }
     }
