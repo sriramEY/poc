@@ -17,13 +17,14 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                   docker build -t sriram21ey/myapp:v2 .
+                   docker pull sriram21ey/myapp:v1
                    docker images
                 '''
             }
         }
         
-        // stage('Deploy to Kubernetes') {
+        // stage('Deploy to Kubernetes') {                    docker build -t sriram21ey/myapp:v2 .
+
         //     steps {
         //         script {
         //             //def kubeconfig = credentials('kubeconfig')
