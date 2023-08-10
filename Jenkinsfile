@@ -11,7 +11,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build("sriram21ey/myapp:v1")
+                    def dockerImage = docker.build("sriram21ey/myapp:${v1}")
                 }
             }
         }
@@ -19,9 +19,9 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    def kubeconfig = credentials('kubeconfig')
+                    //def kubeconfig = credentials('kubeconfig')
                     
-                    sh "kubectl --kubeconfig=$kubeconfig apply -f deployment.yaml"
+                    sh apply -f deployment.yml"
                 }
             }
         }
