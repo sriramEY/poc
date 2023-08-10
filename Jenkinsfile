@@ -15,10 +15,12 @@ pipeline {
         }
         
         stage('Build Docker Image') {
-            sh '''
-               docker build -t sriram21ey/myapp:v2 .
-               docker images
-            '''
+            steps {
+                sh '''
+                   docker build -t sriram21ey/myapp:v2 .
+                   docker images
+                '''
+            }
         }
         
         // stage('Deploy to Kubernetes') {
