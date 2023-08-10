@@ -27,7 +27,7 @@ pipeline {
                 script {
                     //def kubeconfig = credentials('kubeconfig')
                     
-                    sh apply -f deployment.yml"
+                    sh "kubectl apply -f namespace.yml"
                 }
             }
         }
