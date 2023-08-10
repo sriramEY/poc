@@ -14,23 +14,22 @@ pipeline {
             }
         }
         
-        // stage('Build Docker Image') {
+        stage('Build Docker Image') {
+            sh '''
+               docker build -t sriram21ey/myapp:v2 .
+               docker images
+            '''
+        }
+        
+        // stage('Deploy to Kubernetes') {
         //     steps {
         //         script {
-        //             def dockerImage = docker.build("sriram21ey/myapp:${v1}")
+        //             //def kubeconfig = credentials('kubeconfig')
+                    
+        //             sh "kubectl apply -f namespace.yml"
         //         }
         //     }
         // }
-        
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    //def kubeconfig = credentials('kubeconfig')
-                    
-                    sh "kubectl apply -f namespace.yml"
-                }
-            }
-        }
     }
     
     post {
