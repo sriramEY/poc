@@ -14,13 +14,13 @@ pipeline {
             }
         }
         
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    def dockerImage = docker.build("sriram21ey/myapp:${v1}")
-                }
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //             def dockerImage = docker.build("sriram21ey/myapp:${v1}")
+        //         }
+        //     }
+        // }
         
         stage('Deploy to Kubernetes') {
             steps {
